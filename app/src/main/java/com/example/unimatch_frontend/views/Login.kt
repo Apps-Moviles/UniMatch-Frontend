@@ -182,6 +182,7 @@ fun principal(recordarPantalla: NavHostController) {
         ) {
             Text(text = "Iniciar Sesión")
         }
+
     }
 
 }

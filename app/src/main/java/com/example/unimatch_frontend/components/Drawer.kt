@@ -73,7 +73,7 @@ fun Drawer(recordarPantalla: NavHostController){
                 modifier = Modifier.padding(15.dp)
             )
         },
-        selected = true,
+        selected = false,
         onClick = {  }
     )
 
@@ -92,7 +92,7 @@ fun Drawer(recordarPantalla: NavHostController){
                 modifier = Modifier.padding(15.dp)
             )
         },
-        selected = true,
+        selected = false,
         onClick = {  }
     )
 
@@ -111,7 +111,7 @@ fun Drawer(recordarPantalla: NavHostController){
                 modifier = Modifier.padding(15.dp)
             )
         },
-        selected = true,
+        selected = false,
         onClick = { recordarPantalla.popBackStack() }
     )
 }
