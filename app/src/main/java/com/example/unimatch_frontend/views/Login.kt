@@ -39,14 +39,20 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
 import com.example.unimatch_frontend.R
+import com.example.unimatch_frontend.components.TopBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Login(recordarPantalla: NavHostController) {
 
     Scaffold (
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
 
+        topBar = {
+            TopBar(
+                onOpenDrawer = {}
+            )
+        }
     ) {
         principal(recordarPantalla)
     }
@@ -55,8 +61,8 @@ fun Login(recordarPantalla: NavHostController) {
 @Composable
 fun principal(recordarPantalla: NavHostController) {
 
-    var txtUsu by remember { mutableStateOf("") }
-    var txtPas by remember { mutableStateOf("") }
+    var txtUsu by remember { mutableStateOf("Admin") }
+    var txtPas by remember { mutableStateOf("1234") }
 
     Column (
         modifier = Modifier
