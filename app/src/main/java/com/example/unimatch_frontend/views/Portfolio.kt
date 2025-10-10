@@ -41,21 +41,19 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Dashboard(recordarPantalla: NavHostController) {
+fun Portfolio(recordarPantalla: NavHostController) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    val proyects = arrayOf(
+    val portfolios = arrayOf(
         mapOf(
             "title" to "Front-End Design",
-            "status" to "En Curso",
-            "createdAt" to "01/10/25"
+            "owner" to "BioPafi",
         ),
         mapOf(
-            "title" to "Data Analysis",
-            "status" to "Aceptado",
-            "createdAt" to "02/10/25"
+            "title" to "Backend-developer",
+            "owner" to "Zoren",
         ),
     )
 
@@ -91,47 +89,34 @@ fun Dashboard(recordarPantalla: NavHostController) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Text(
-                    text = "Bienvenido a UniMatch",
+                    text = "Portfolio",
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Mis Proyectos",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFFFACD),
-                        contentColor = Color.Black
-                    )
-                ) {
-                    Text(text = "Nuevo Proyecto")
-                }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top,
                 ) {
-                    proyects.forEach { pr ->
+                    portfolios.forEachIndexed { index, pf ->
                         Card(
                             modifier = Modifier
-                                .padding(vertical = 10.dp)
+                                .padding(vertical = 10.dp),
+                            onClick = {
+                                recordarPantalla.navigate("Portfolio/${index}")
+                            }
                         ) {
                             Column(
 
                             ) {
-                                Text(text = pr["title"]!!)
+                                Text(text = pf["title"]!!)
 
                                 Spacer(modifier = Modifier
                                     .height(15.dp))
+                                Text(text = "By " + pf["owner"]!!, fontSize = 14.sp)
+                                Text(text = "Finalizado hace 1 semana", fontSize = 12.sp)
 
                                 Row (
                                     modifier = Modifier
@@ -139,9 +124,6 @@ fun Dashboard(recordarPantalla: NavHostController) {
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically
                                 ){
-                                    StatusChip(pr["status"]!!)
-
-                                    Text(text = pr["createdAt"]!!)
                                 }
                             }
                         }

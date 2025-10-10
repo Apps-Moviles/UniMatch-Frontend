@@ -41,21 +41,21 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Dashboard(recordarPantalla: NavHostController) {
+fun Oportunities(recordarPantalla: NavHostController) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    val proyects = arrayOf(
+    val oportunities = arrayOf(
         mapOf(
             "title" to "Front-End Design",
-            "status" to "En Curso",
-            "createdAt" to "01/10/25"
+            "owner" to "BioPafi",
+            "payment" to "$200"
         ),
         mapOf(
-            "title" to "Data Analysis",
-            "status" to "Aceptado",
-            "createdAt" to "02/10/25"
+            "title" to "Backend-developer",
+            "owner" to "BioPafi",
+            "payment" to "$150"
         ),
     )
 
@@ -91,58 +91,41 @@ fun Dashboard(recordarPantalla: NavHostController) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Text(
-                    text = "Bienvenido a UniMatch",
+                    text = "Oportunidades",
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Mis Proyectos",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFFFACD),
-                        contentColor = Color.Black
-                    )
-                ) {
-                    Text(text = "Nuevo Proyecto")
-                }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top,
                 ) {
-                    proyects.forEach { pr ->
+                    oportunities.forEachIndexed { index, op ->
                         Card(
                             modifier = Modifier
-                                .padding(vertical = 10.dp)
+                                .padding(vertical = 10.dp),
+                            onClick = {
+                                recordarPantalla.navigate("Opportunities/${index}")
+                            }
                         ) {
-                            Column(
-
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = pr["title"]!!)
-
-                                Spacer(modifier = Modifier
-                                    .height(15.dp))
-
-                                Row (
+                                Column (
                                     modifier = Modifier
-                                        .fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
                                 ){
-                                    StatusChip(pr["status"]!!)
+                                    Text(text = op["title"]!!)
+                                    Text(text = "By " + op["owner"]!!, fontSize = 14.sp)
+                                    Text(text = "Hace 2 dias", fontSize = 12.sp)
 
-                                    Text(text = pr["createdAt"]!!)
                                 }
+
+                                Text(text = op["payment"]!!, fontSize = 24.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
