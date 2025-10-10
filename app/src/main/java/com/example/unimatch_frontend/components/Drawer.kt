@@ -12,6 +12,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -58,6 +61,66 @@ fun Drawer(recordarPantalla: NavHostController){
     HorizontalDivider()
     Spacer(modifier = Modifier.height(10.dp))
 
+    NavigationDrawerItem(
+        icon = {
+            Icon(
+                imageVector = Icons.Default.Home,
+                contentDescription = null
+            )
+        },
+
+        label = {
+            Text(
+                text = "Postulaciones",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(15.dp)
+            )
+        },
+        selected = false,
+        onClick = {
+            recordarPantalla.navigate("V2")
+        }
+    )
+    NavigationDrawerItem(
+        icon = {
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = null
+            )
+        },
+
+        label = {
+            Text(
+                text = "Oportunidades",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(15.dp)
+            )
+        },
+        selected = false,
+        onClick = {
+            recordarPantalla.navigate("Opportunities")
+        }
+    )
+    NavigationDrawerItem(
+        icon = {
+            Icon(
+                imageVector = Icons.Default.Face,
+                contentDescription = null
+            )
+        },
+
+        label = {
+            Text(
+                text = "Portfolio",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(15.dp)
+            )
+        },
+        selected = false,
+        onClick = {
+            recordarPantalla.navigate("Portfolio")
+        }
+    )
     NavigationDrawerItem(
         icon = {
             Icon(

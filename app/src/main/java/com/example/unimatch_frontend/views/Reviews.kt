@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -41,21 +46,26 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Dashboard(recordarPantalla: NavHostController) {
+fun Reviews(recordarPantalla: NavHostController) {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    val proyects = arrayOf(
+    val reviews = arrayOf(
         mapOf(
-            "title" to "Front-End Design",
-            "status" to "En Curso",
-            "createdAt" to "01/10/25"
+            "review" to "Buen jefe y buenos tiempos de entrega",
+            "owner" to "Jair Ramirez",
+            "puntuation" to "4.9"
         ),
         mapOf(
-            "title" to "Data Analysis",
-            "status" to "Aceptado",
-            "createdAt" to "02/10/25"
+            "review" to "Desorganizado en la planificación pero buena paga",
+            "owner" to "Norma Romero",
+            "puntuation" to "3.5"
+        ),
+        mapOf(
+            "review" to "Buenos compañeros y excelente paga",
+            "owner" to "Luciana Vega",
+            "puntuation" to "4.8"
         ),
     )
 
@@ -91,57 +101,48 @@ fun Dashboard(recordarPantalla: NavHostController) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Text(
-                    text = "Bienvenido a UniMatch",
+                    text = "Reseñas",
                     fontWeight = FontWeight.Bold,
                     fontSize = 30.sp,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Mis Proyectos",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp,
-                    color = Color.Black
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFFFFFACD),
-                        contentColor = Color.Black
-                    )
-                ) {
-                    Text(text = "Nuevo Proyecto")
-                }
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Top,
                 ) {
-                    proyects.forEach { pr ->
+                    reviews.forEachIndexed { index, rv ->
                         Card(
                             modifier = Modifier
-                                .padding(vertical = 10.dp)
+                                .padding(vertical = 10.dp),
+                            onClick = {}
                         ) {
-                            Column(
-
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = pr["title"]!!)
-
-                                Spacer(modifier = Modifier
-                                    .height(15.dp))
-
-                                Row (
+                                Column (
                                     modifier = Modifier
-                                        .fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
+                                        .width(250.dp)
                                 ){
-                                    StatusChip(pr["status"]!!)
+                                    Text(text = "\"${rv["review"]!!}\"")
+                                    Text(text = "By " + rv["owner"]!!, fontSize = 14.sp)
 
-                                    Text(text = pr["createdAt"]!!)
+                                }
+
+                                Row(
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Star, // estrella vacía
+                                        contentDescription = "Estrella vacía",
+                                        modifier = Modifier.size(22.dp)
+                                    )
+                                    Text(text = rv["puntuation"]!!, fontSize = 18.sp)
                                 }
                             }
                         }
